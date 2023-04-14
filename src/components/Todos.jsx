@@ -18,8 +18,19 @@ export default function Todos() {
     }])
   }
 
+  function completeTodo(id){
+    const newTodos = todos.map(todo => {
+      if(todo.id != id)return todo
+      return {
+        ...todo,
+        completed: !todo.completed
+      }
+    })
+    setTodos(newTodos)
+  }
+
   const displayedToDos = todos.filter(todo => todo.task.toLowerCase().includes(searchValue.toLowerCase())).map(todo => {
-    return <Todo key={todo.id} id={todo.id} task={todo.task} assignee={todo.assignee} completed={todo.completed} />
+    return <Todo key={todo.id} id={todo.id} task={todo.task} assignee={todo.assignee} completed={todo.completed} completeTodo={completeTodo} />
   })
   return (
     <>
