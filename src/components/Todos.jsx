@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Searchbar from './Searchbar'
 import Todo from './Todo'
 import Inputs from './Inputs'
+import Footer from './Footer'
 
 export default function Todos() {
   const [todos, setTodos] = useState([])
@@ -34,8 +35,14 @@ export default function Todos() {
     setTodos(newTodos)
   }
 
+  function deleteTodo(id){
+    const newTodos = todos.filter(todo => todo.id != id)
+
+    setTodos(newTodos)
+  }
+
   const displayedToDos = todos.filter(todo => todo.task.toLowerCase().includes(searchValue.toLowerCase())).map(todo => {
-    return <Todo key={todo.id} id={todo.id} task={todo.task} assignee={todo.assignee} completed={todo.completed} completeTodo={completeTodo} />
+    return <Todo key={todo.id} id={todo.id} task={todo.task} assignee={todo.assignee} completed={todo.completed} completeTodo={completeTodo} deleteTodo={deleteTodo} />
   })
   return (
     <>
@@ -46,6 +53,7 @@ export default function Todos() {
               {!hidden && displayedToDos}
           </div>
       </main>
+      <Footer todos={todos} />
     </>
     
     

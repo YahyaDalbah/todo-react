@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function Todo({id, task, assignee, completed, completeTodo}) {
+export default function Todo({id, task, assignee, completed, completeTodo, deleteTodo}) {
 
   let className = completed ? 'task done' : 'task'
 
@@ -15,7 +15,7 @@ export default function Todo({id, task, assignee, completed, completeTodo}) {
         <p>assignee: <span>{assignee}</span></p>
       </div>
       <div>
-        <button className='delete'>delete</button>
+        <button onClick={() => deleteTodo(id)} className='delete'>delete</button>
       </div>
     </div>
   )
