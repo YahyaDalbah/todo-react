@@ -24,7 +24,9 @@ export default function Inputs({addTask}) {
           e.preventDefault()
           setTask('')
           setAssignee('')
-          addTask(task, assignee)
+          if(task != '' && assignee != ''){
+            addTask(task, assignee)
+          }
         }}>Add</button>
       </form>
       <br />

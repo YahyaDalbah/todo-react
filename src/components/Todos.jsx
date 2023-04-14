@@ -5,12 +5,11 @@ import Inputs from './Inputs'
 
 export default function Todos() {
   const [todos, setTodos] = useState([])
+  const [searchValue, setSearchValue] = useState('')
 
   console.log(todos)
 
   function addTask(task, assignee){
-
-
     setTodos([...todos, {
       id: Math.random(),
       task: task,
@@ -19,14 +18,14 @@ export default function Todos() {
     }])
   }
 
-  const displayedToDos = todos.map(todo => {
-    return <Todo task={todo.task} assignee={todo.assignee} />
+  const displayedToDos = todos.filter(todo => todo.task.toLowerCase().includes(searchValue.toLowerCase())).map(todo => {
+    return <Todo key={todo.id} id={todo.id} task={todo.task} assignee={todo.assignee} completed={todo.completed} />
   })
   return (
     <>
       <Inputs addTask={addTask} />
       <main>
-          <Searchbar />
+          <Searchbar setSearchValue={setSearchValue} />
           <div className="tasks-container">
               {displayedToDos}
           </div>
