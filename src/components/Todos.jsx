@@ -6,6 +6,7 @@ import Inputs from './Inputs'
 export default function Todos() {
   const [todos, setTodos] = useState([])
   const [searchValue, setSearchValue] = useState('')
+  const [hidden,setHidden] = useState(false)
 
   console.log(todos)
 
@@ -16,6 +17,10 @@ export default function Todos() {
       assignee: assignee,
       completed: false
     }])
+  }
+
+  function hideTodos(){
+    setHidden(prev => !prev)
   }
 
   function completeTodo(id){
@@ -36,9 +41,9 @@ export default function Todos() {
     <>
       <Inputs addTask={addTask} />
       <main>
-          <Searchbar setSearchValue={setSearchValue} />
+          <Searchbar setSearchValue={setSearchValue} hideTodos={hideTodos} hidden={hidden}/>
           <div className="tasks-container">
-              {displayedToDos}
+              {!hidden && displayedToDos}
           </div>
       </main>
     </>
